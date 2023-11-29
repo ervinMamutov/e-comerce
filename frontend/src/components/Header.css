@@ -1,0 +1,10 @@
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import { FaShoppingCart, FaUser } from 'react-icons/fa';
+
+import './Header.css';
+
+const Header = () => {
+  return <div>Header</div>;
+};
+
+export default Header;
