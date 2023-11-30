@@ -15,7 +15,7 @@ const ProductScreen = () => {
     const fetchProduct = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:3002/api/products/2`
+          `http://localhost:3002/api/products/${productId}`
         );
         setProduct(data);
       } catch (err) {
