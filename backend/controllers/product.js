@@ -1,6 +1,9 @@
 import Product from '../models/product.js';
 
 const productControllers = {
+  // @desc Fetch all products
+  // @route GET/api/products
+  // @access Public
   getProducts: async (req, res) => {
     try {
       const products = await Product.find({});
@@ -22,26 +25,28 @@ const productControllers = {
       });
     }
   },
+
+  // @desc Fetch a product
+  // @route GET/api/products/:id
+  // @access Public
   getProductById: async (req, res) => {
+    const id = req.params.id;
     try {
-      const id = req.params.id;
       const productById = await Product.findById(id);
-      if (!productById) {
-        return res.status(400).json({
-          success: false,
-          message: `Product by id ${id} not found`,
-        });
-      } else {
+      if (productById) {
         return res.status(200).json({
           success: true,
           productById,
         });
+      } else {
+        return res.status(404).json({
+          success: false,
+          message: 'Product not found',
+        });
       }
     } catch (err) {
-      res.status(400).json({
-        success: false,
-        message: `Product by ${id} not found`,
-      });
+      res.status(404);
+      console.error(err);
     }
   },
 };

@@ -4,6 +4,8 @@ import cors from 'cors';
 
 import connectDB from './config/db.js';
 import productRouters from './routes/product.js';
+import notFound from './models/middleware/notFoundHandler.js';
+import errorHandler from './models/middleware/errorHandler.js';
 
 dotenv.config();
 
@@ -25,6 +27,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/products', productRouters);
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Server already running on port ${port}`);
