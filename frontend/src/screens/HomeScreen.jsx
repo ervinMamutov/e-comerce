@@ -10,16 +10,18 @@ const HomeScreen = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data } = await axios.get('http://localhost:3002/api/products');
-
-      setProducts(data);
+      try {
+        const res = await axios.get('http://localhost:3002/api/products/');
+        setProducts(res.data.products);
+      } catch (err) {
+        console.error('Error fetching products:', err);
+      }
     };
     fetchProducts();
   }, []);
-
   return (
     <>
-      <h1>Latest Product</h1>
+      <h1>Latest Products</h1>
       <Row>
         {products.map((product) => (
           <Col key={product._id} sm={12} md={6} lg={4} xl={3}>

@@ -6,25 +6,24 @@ import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import Rating from '../components/Rating.jsx';
 
 const ProductScreen = () => {
-  const [product, setProduct] = useState();
+  const [product, setProduct] = useState({});
 
   const { id: productId } = useParams();
 
-  console.log(productId);
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await axios.get(
+        const res = await axios.get(
           `http://localhost:3002/api/products/${productId}`
         );
-        setProduct(data);
+        console.log(res.data.productById);
+        setProduct(res.data.productById);
       } catch (err) {
         console.error(err);
       }
     };
     fetchProduct();
   }, [productId]);
-  console.log('after', product);
 
   return (
     <>
