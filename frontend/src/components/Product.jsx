@@ -4,7 +4,6 @@ import Rating from './Rating';
 import PropTypes from 'prop-types';
 
 const Product = ({ product }) => {
-  console.log(product);
   return (
     <Card className="my-3 p-3 rounded">
       <NavLink to={`/product/${product._id}`}>
